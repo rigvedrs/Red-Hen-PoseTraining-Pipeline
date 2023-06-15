@@ -7,7 +7,7 @@ from tqdm import tqdm
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--json_dir', type=str, default='coco/', help='File path to JSON directory')
-parser.add_argument('--output_dir', type=str, default='../Data/COCO_data/', help='File path to output directory')
+parser.add_argument('--output_dir', type=str, default='../Data/coco_data/', help='File path to output directory')
 
 args = parser.parse_args()
 

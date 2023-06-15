@@ -1,11 +1,21 @@
+import os
 from ultralytics.yolo.data.converter import convert_coco
-import subprocess
 
 # Convert coco to yolo
 convert_coco(labels_dir='coco/', use_keypoints=True)
 
-# Move to Data dir
-command = 'mv ./yolo_labels ../Data'
-subprocess.run(command, shell=True)
+# Create train, val, and test directories
+os.makedirs('../Data/dataset/train/labels/', exist_ok=True)
+os.makedirs('../Data/dataset/val/labels/', exist_ok=True)
+os.makedirs('../Data/dataset/test/labels/', exist_ok=True)
 
-print('Labels saved')
+os.makedirs('../Data/dataset/train/images/', exist_ok=True)
+os.makedirs('../Data/dataset/val/images/', exist_ok=True)
+os.makedirs('../Data/dataset/test/images/', exist_ok=True)
+
+# Move labels to respective directories
+os.system('mv ./yolo_labels/train/* ../Data/dataset/train/labels/')
+os.system('mv ./yolo_labels/test/* ../Data/dataset/test/labels/')
+os.system('mv ./yolo_labels/val/* ../Data/dataset/val/labels/')
+
+print('Labels saved') 
