@@ -2,6 +2,7 @@ import json
 import os
 import requests
 from tqdm import tqdm
+import argparse
 
 # Parsing arguments
 parser = argparse.ArgumentParser()
