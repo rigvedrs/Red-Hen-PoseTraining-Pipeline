@@ -14,8 +14,8 @@ os.makedirs('../Data/dataset/val/images/', exist_ok=True)
 os.makedirs('../Data/dataset/test/images/', exist_ok=True)
 
 # Move labels to respective directories
-os.system('mv ./yolo_labels/train/* ../Data/dataset/train/labels/')
-os.system('mv ./yolo_labels/test/* ../Data/dataset/test/labels/')
-os.system('mv ./yolo_labels/val/* ../Data/dataset/val/labels/')
+os.system('find yolo_labels/labels/train/ -type f -exec mv -t ../Data/dataset/train/labels/ {} +')
+os.system('mv ./yolo_labels/labels/test/* ../Data/dataset/test/labels/')
+os.system('mv ./yolo_labels/labels/val/* ../Data/dataset/val/labels/')
 
 print('Labels saved') 
