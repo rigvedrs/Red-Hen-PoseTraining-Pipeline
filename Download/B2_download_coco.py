@@ -23,7 +23,11 @@ os.chdir("coco")
 
 download_and_extract("http://images.cocodataset.org/annotations/annotations_trainval2017.zip", "annotations_trainval2017.zip", "annotations")
 
-os.rename("annotations/annotations", "annotations")
-os.rmdir("annotations/annotations")
+# Move files from annotations/annotations to annotations/
+for file_path in glob.glob("annotations/annotations/*"):
+    shutil.move(file_path, "annotations")
+
+# Remove annotations/annotations directory
+shutil.rmtree("annotations/annotations")
 
 print("All JSON files downloaded successfully.")
