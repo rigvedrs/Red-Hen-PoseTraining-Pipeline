@@ -13,7 +13,7 @@ def download_file(url, file_name):
 os.system('git clone https://github.com/rigvedrs/pytorch-AdaIN.git')
 
 # Move files and directories from pytorch-AdaIN
-os.system('mv pytorch-AdaIN/{.*,*} ./')
+os.system('cp -r pytorch-AdaIN/* ./')
 os.system('rm -rf pytorch-AdaIN/')
 
 # Create 'models' directory
