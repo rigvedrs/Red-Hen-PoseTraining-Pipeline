@@ -1,23 +1,24 @@
 #!/bin/bash
+#SBATCH --job-name=MyJob
+#SBATCH --output=myjob.out
+#SBATCH --error=myjob.err
+#SBATCH --time=12:00:00
+#SBATCH --mem=200G
+#SBATCH --partition=gpup100
+#SBATCH --gres=gpu:1
+#SBATCH --nodelist=gput042
 
-rsync -az rsync ultralytics_latest.sif $PFSDIR
-cd $PFSDIR
-echo ".sif File synced successfully"
-
-echo "Loading singularity enviroment...."
+echo "Stage: 1 - Loading Code Files and environment"
 module load singularity
-echo "Enviroment successfully Loaded."
-
-echo "Stage: 1 - Loading Code Files"
 git clone https://github.com/rigvedrs/Red-Hen-PoseTraining-Pipeline.git
-echo "Code files succesfully loaded"
+cd Red-Hen-PoseTraining-Pipeline/
+echo "Stage: 1 Successfully completed"
 
 echo "Stage: 2 - Downloading and Generating Data"
-singularity run --nv ultralytics_latest.sif python3 Red-Hen-PoseTraining-Pipeline/generator.py
-echo "Stage: 2 Succesfully completed"
+singularity run --nv ../ultralytics_latest.sif python3 generator.py
+echo "Stage: 2 Successfully completed"
 
-echo "Stage: 2- Training the feature-extractor to extract patch level features"
-singularity run --nv christian-art-tagging_latest.sif python feature_extractor/train.py -c --train --device cuda --data_dir feature_extractor/
-
-echo "Stage: 3- Training the Image-Captioning model that uses intra-modal features"
-singularity run --nv christian-art-tagging_latest.sif python captioning/train.py --data_dir curation/EmileMaleDataset/ --feature_extractor_path feature_extractor/artDL.pt --device cuda --train
+echo "Stage: 2 - Fine-tuning the pose detection model"
+cd Train
+singularity run --nv ../../ultralytics_latest.sif python3 tune.py
+echo "Stage: 2 Successfully completed"

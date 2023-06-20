@@ -67,19 +67,6 @@ filtered_train_data = {
 with open(output_dir+'train.json', 'w') as f:
     json.dump(filtered_train_data, f)
 
-# # Prepare the filtered validation dataset
-# filtered_val_data = {
-#     'info': coco_val.dataset['info'],
-#     'licenses': coco_val.dataset['licenses'],
-#     'images': filtered_val_images,
-#     'annotations': filtered_val_annotations,
-#     'categories': coco_val.dataset['categories']
-# }
-
-# # Save the filtered validation dataset to 'filtered_val.json'
-# with open('val.json', 'w') as f:
-#     json.dump(filtered_val_data, f)
-
 print('Train file saved.')
 
 
