@@ -15,7 +15,8 @@ cd Red-Hen-PoseTraining-Pipeline/
 echo "Stage: 1 Successfully completed"
 
 echo "Stage: 2 - Downloading and Generating Data"
-singularity run --nv ../ultralytics_latest.sif python3 generator.py
+singularity run --nv ../ultralytics_latest.sif chmod +x generator.sh
+singularity run --nv ../ultralytics_latest.sif ./generator.sh
 echo "Stage: 2 Successfully completed"
 
 echo "Stage: 2 - Fine-tuning the pose detection model"
