@@ -3,7 +3,7 @@
 #SBATCH --output=myjob.out
 #SBATCH --error=myjob.err
 #SBATCH --time=12:00:00
-#SBATCH --mem=200G
+#SBATCH --mem=100G
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --nodelist=gput042
