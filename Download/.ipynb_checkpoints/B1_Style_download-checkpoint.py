@@ -1,10 +1,9 @@
 import pandas as pd
 import requests
 import os
-from PIL import Image
-import argparse
+import re
 from tqdm import tqdm
-
+import argparse
 
 # Parsing arguments
 parser = argparse.ArgumentParser()
@@ -15,6 +14,11 @@ parser.add_argument('--output_dir', type=str, default='../Data/style_data/', hel
 
 args = parser.parse_args()
 
+def sanitize(filename: str) -> str:
+    # This line replaces any character not a number, letter, or underscore with an underscore
+    filename = re.sub(r'[^\w\s]', '_', filename)
+    return filename
+
 # Read the file 
 file_path = args.csv_loc
 df = pd.read_csv(file_path)
@@ -22,34 +26,34 @@ assert args.num < len(df), f"Number entered is more than length of df ({len(df)}
 
 output_dir = args.output_dir
 
-# Download the images
+# Create output directory if it does not exist
 os.makedirs(output_dir, exist_ok=True)
 
 # Download and save the selected images
 if args.num == 0:
-	for c, row in tqdm(df.iterrows(),total=len(df)):
-		image_link = row['IMAGE_LINK']
-		title = row['TITLE']
-		technique = row['TECHNIQUE']
-		file_name = f"{output_dir}/{title}_{technique}.jpg"  
+    for c, row in tqdm(df.iterrows(), total=len(df)):
+        image_link = row['IMAGE_LINK']
+        title = sanitize(row['TITLE'])
+        technique = sanitize(row['TECHNIQUE'])
+        file_name = f"{output_dir}/{title}_{technique}.jpg"  
 
-		response = requests.get(image_link)
+        response = requests.get(image_link)
 
-		# Saving Image
-		with open(file_name, 'wb') as file:
-			file.write(response.content)
+        # Saving Image
+        with open(file_name, 'wb') as file:
+            file.write(response.content)
 
 else:
-	for c, row in tqdm(df.iterrows(),total=args.num):
-		if c == args.num:
-			break
-		image_link = row['IMAGE_LINK']
-		title = row['TITLE']
-		technique = row['TECHNIQUE']
-		file_name = f"{output_dir}/{title}_{technique}.jpg"  
-		response = requests.get(image_link)
+    for c, row in tqdm(df.iterrows(), total=args.num):
+        if c == args.num:
+            break
+        image_link = row['IMAGE_LINK']
+        title = sanitize(row['TITLE'])
+        technique = sanitize(row['TECHNIQUE'])
+        file_name = f"{output_dir}/{title}_{technique}.jpg"  
+        
+        response = requests.get(image_link)
 
-		# Saving Image
-		with open(file_name, 'wb') as file:
-			file.write(response.content)
-
+        # Saving Image
+        with open(file_name, 'wb') as file:
+            file.write(response.content)
