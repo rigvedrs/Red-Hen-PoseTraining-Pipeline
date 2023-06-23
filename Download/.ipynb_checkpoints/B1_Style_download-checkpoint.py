@@ -16,8 +16,9 @@ args = parser.parse_args()
 
 def sanitize(filename: str) -> str:
     # This line replaces any character not a number, letter, or underscore with an underscore
-    filename = re.sub(r'[^\w\s]', '_', filename)
+    filename = re.sub('[^a-zA-Z0-9\n\.]', '_', filename)
     return filename
+
 
 # Read the file 
 file_path = args.csv_loc
@@ -29,13 +30,16 @@ output_dir = args.output_dir
 # Create output directory if it does not exist
 os.makedirs(output_dir, exist_ok=True)
 
+count = 0
+
 # Download and save the selected images
 if args.num == 0:
     for c, row in tqdm(df.iterrows(), total=len(df)):
+        count+=1
         image_link = row['IMAGE_LINK']
-        title = sanitize(row['TITLE'])
-        technique = sanitize(row['TECHNIQUE'])
-        file_name = f"{output_dir}/{title}_{technique}.jpg"  
+        # title = sanitize(row['TITLE'])
+        # technique = sanitize(row['TECHNIQUE'])
+        file_name = f"{output_dir}/img_{count}.jpg"  
 
         response = requests.get(image_link)
 
@@ -45,12 +49,13 @@ if args.num == 0:
 
 else:
     for c, row in tqdm(df.iterrows(), total=args.num):
+        count+=1
         if c == args.num:
             break
         image_link = row['IMAGE_LINK']
-        title = sanitize(row['TITLE'])
-        technique = sanitize(row['TECHNIQUE'])
-        file_name = f"{output_dir}/{title}_{technique}.jpg"  
+        # title = sanitize(row['TITLE'])
+        # technique = sanitize(row['TECHNIQUE'])
+        file_name = f"{output_dir}/img_{count}.jpg"  
         
         response = requests.get(image_link)
 
