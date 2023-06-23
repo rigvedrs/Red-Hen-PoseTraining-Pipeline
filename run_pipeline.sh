@@ -19,7 +19,7 @@ singularity run --nv ../ultralytics_latest.sif chmod +x generator.sh
 singularity run --nv ../ultralytics_latest.sif ./generator.sh
 echo "Stage: 2 Successfully completed"
 
-echo "Stage: 2 - Fine-tuning the pose detection model"
+echo "Stage: 3 - Fine-tuning the pose detection model"
 cd Train
 singularity run --nv ../../ultralytics_latest.sif python3 tune.py
-echo "Stage: 2 Successfully completed"
+echo "Stage: 3 Successfully completed"

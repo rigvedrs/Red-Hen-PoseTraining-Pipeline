@@ -16,8 +16,9 @@ args = parser.parse_args()
 
 def sanitize(filename: str) -> str:
     # This line replaces any character not a number, letter, or underscore with an underscore
-    filename = re.sub(r'[^\w\s]', '_', filename)
+    filename = re.sub('[^a-zA-Z0-9\n\.]', '_', filename)
     return filename
+
 
 # Read the file 
 file_path = args.csv_loc
