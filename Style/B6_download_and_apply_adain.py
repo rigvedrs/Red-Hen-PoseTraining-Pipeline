@@ -17,7 +17,7 @@ os.system('cp -r pytorch-AdaIN/* ./')
 os.system('rm -rf pytorch-AdaIN/')
 
 # Create 'models' directory
-os.system('mkdir models/')
+os.makedirs('models/', exist_ok=True)
 
 # Download decoder.pth
 download_file("https://docs.google.com/uc?export=download&id=1bMfhMMwPeXnYSQI6cDWElSZxOxc6aVyr", "models/decoder.pth")
@@ -28,8 +28,8 @@ download_file("https://drive.google.com/uc?id=1EpkBA2K2eYILDSyPTt0fztz59UjAIpZU"
 print("Download completed successfully.")
 
 # Apply style using applystyle.py script
-os.system('python3 applystyle.py --content_dir ../Data/coco_data/train/ --style_dir Data/style_data/ --output ../Data/datasets/train/images/ --delete True')
+os.system('python3 applystyle.py --content_dir ../Data/coco_data/train/ --style_dir ../Data/style_data/ --output ../Data/datasets/train/images/ --delete True')
 
-os.system('python3 applystyle.py --content_dir ../Data/coco_data/test/ --style_dir Data/style_data/ --output ../Data/datasets/test/images/ --delete True')
+os.system('python3 applystyle.py --content_dir ../Data/coco_data/test/ --style_dir ../Data/style_data/ --output ../Data/datasets/test/images/ --delete True')
 
-os.system('python3 applystyle.py --content_dir ../Data/coco_data/val/ --style_dir Data/style_data/ --output ../Data/datasets/val/images/ --delete True')
+os.system('python3 applystyle.py --content_dir ../Data/coco_data/val/ --style_dir ../Data/style_data/ --output ../Data/datasets/val/images/ --delete True')
