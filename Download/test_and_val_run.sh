@@ -6,6 +6,7 @@ set -e
 #SBATCH --time=12:00:00
 #SBATCH --mem=50G
 #SBATCH --partition=gpu
+#SBATCH --constraint=gpup100
 #SBATCH --gres=gpu:1
 #SBATCH --nodelist=gput039
 
