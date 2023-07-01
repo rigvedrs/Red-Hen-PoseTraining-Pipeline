@@ -1,10 +1,9 @@
 import ultralytics
 from ultralytics import YOLO
 
-# import os
-# os.system('pip install --user wandb')
-# import wandb
-# wandb.login(key=)
+import wandb
+wandb.login(key=)
+
 # os.system('yolo pose train data="stylecoco.yaml" model=yolov8n.yaml pretrained=yolov8n.pt epochs=120 imgsz=640 project=Hands-fracture-YOLOv8 name=V8n-80-hq')
 
 
