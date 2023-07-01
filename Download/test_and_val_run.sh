@@ -1,14 +1,12 @@
 #!/bin/bash
-set -e
-#SBATCH --job-name=Gen_data
+#SBATCH --job-name=gen_data
 #SBATCH --output=gen_data.out
 #SBATCH --error=gen_data.err
-#SBATCH --time=12:00:00
-#SBATCH --mem=50G
 #SBATCH --partition=gpu
 #SBATCH --constraint=gpup100
-#SBATCH --gres=gpu:1
 #SBATCH --nodelist=gput039
+#SBATCH --gres=gpu:1
+#SBATCH --mem=50GB
 
 module load singularity
 
