@@ -15,12 +15,12 @@ cd Red-Hen-PoseTraining-Pipeline/
 echo "Stage: 1 - Environment successfully loaded"
 
 echo "Stage: 2 - Generating Data"
-echo "Stage: 2 - Generating Train Data"
-singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/train/ --style_dir ../Data/style_data/ --output ../Data/datasets/train/images/ --delete True
-
 echo "Stage: 2 - Generating Test Data"
 singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/test/ --style_dir ../Data/style_data/ --output ../Data/datasets/test/images/ --delete True
 
-echo "Stage: 2 - Generating Val Data"
+echo "Stage: 3 - Generating Val Data"
 singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/val/ --style_dir ../Data/style_data/ --output ../Data/datasets/val/images/ --delete True
-echo "Stage: 2 Successfully completed"
+
+echo "Stage: 4 - Generating Train Data"
+singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/train/ --style_dir ../Data/style_data/ --output ../Data/datasets/train/images/ --delete True
+echo "All stages Successfully completed"

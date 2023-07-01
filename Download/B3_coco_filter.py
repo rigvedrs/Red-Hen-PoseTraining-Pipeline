@@ -72,14 +72,13 @@ print('Train file saved.')
 
 # Select the first 1000 images from the validation dataset for val.json and save the remaining for test.json
 
-# Get all image IDs in the validation set
-val_image_ids = coco_val.getImgIds()
+# Select the first 1000 images from the validation dataset for val.json and save the remaining for test.json
 
-# Select the first 1000 images for validation
-val_image_ids_selected = val_image_ids[:1000]
+# Select the first 1000 filtered images for validation
+val_image_ids_selected = filtered_val_image_ids[:1000]
 
 # Select the remaining images for testing
-test_image_ids = val_image_ids[1000:]
+test_image_ids = filtered_val_image_ids[1000:]
 
 # Filter images and annotations for validation set
 val_images = coco_val.loadImgs(val_image_ids_selected)

@@ -9,6 +9,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--json_dir', type=str, default='coco/', help='File path to JSON directory')
 parser.add_argument('--output_dir', type=str, default='../Data/coco_data/', help='File path to output directory')
+parser.add_argument('--skip_train', type=bool, default=False, help'If you want to skip downloading the train images')
 
 args = parser.parse_args()
 
@@ -51,21 +52,24 @@ os.makedirs(val_output_dir, exist_ok=True)
 os.makedirs(test_output_dir, exist_ok=True)
 
 # Download the images from train dataset with a progress bar
-print("Downloading train images:")
-with tqdm(total=len(train_images), ncols=80, bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}') as pbar:
-    for image_info in train_images:
-        image_url = image_info['coco_url']
-        image_id = image_info['id']
-        file_name = f"{train_output_dir}/{str(image_id).zfill(12)}.jpg"
+if args.skip_train:
+    print('Skipping train images')
+else:
+    print("Downloading train images:")
+    with tqdm(total=len(train_images), ncols=80, bar_format='{l_bar}{bar}| {n_fmt}/{total_fmt}') as pbar:
+        for image_info in train_images:
+            image_url = image_info['coco_url']
+            image_id = image_info['id']
+            file_name = f"{train_output_dir}/{str(image_id).zfill(12)}.jpg"
 
-        # Send a request to download the image
-        response = requests.get(image_url)
+            # Send a request to download the image
+            response = requests.get(image_url)
 
-        # Save the image to the specified file path
-        with open(file_name, 'wb') as file:
-            file.write(response.content)
+            # Save the image to the specified file path
+            with open(file_name, 'wb') as file:
+                file.write(response.content)
 
-        pbar.update(1)
+            pbar.update(1)
 
 # Download the images from val dataset with a progress bar
 print("Downloading val images:")
