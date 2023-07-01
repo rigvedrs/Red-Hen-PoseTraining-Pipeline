@@ -4,7 +4,7 @@
 #SBATCH --error=train.err
 #SBATCH --partition=gpu
 #SBATCH --constraint=gpup100
-#SBATCH --nodelist=gput039
+#SBATCH --nodelist=gput041
 #SBATCH --gres=gpu:1
 #SBATCH --mem=50GB
 

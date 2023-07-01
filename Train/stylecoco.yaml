@@ -1,7 +1,7 @@
 # Ultralytics YOLO 🚀, AGPL-3.0 license
 
 
-path: ../Data/datasets/  # dataset root dir
+path: ../Data/dataset/  # dataset root dir
 train: train/ # train images (relative to 'path') 118287 images
 val: val/  # val images (relative to 'path') 5000 images
 test: test/  # 20288 of 40670 images, submit to https://competitions.codalab.org/competitions/20794

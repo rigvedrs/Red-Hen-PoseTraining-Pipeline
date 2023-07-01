@@ -12,7 +12,7 @@ from ultralytics import YOLO
 model = YOLO('yolov8l-pose.pt') # load pretrained model 
 
 # Train the model
-model.train(data='stylecoco.yaml', epochs=50,imgsz=640)
+model.train(data='stylecoco.yaml', epochs=50,imgsz=640, save=True, plots=True)
 
 
 
