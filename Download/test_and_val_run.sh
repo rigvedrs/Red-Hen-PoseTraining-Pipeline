@@ -9,6 +9,8 @@ set -e
 #SBATCH --gres=gpu:1
 #SBATCH --nodelist=gput039
 
+module load singularity
+
 echo "Filtering data"
 
 singularity run --nv ../../ultralytics_latest.sif python3 B3_coco_filter.py
