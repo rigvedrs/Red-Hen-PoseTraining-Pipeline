@@ -21,9 +21,9 @@ singularity run --nv ../../ultralytics_latest.sif python3 B4_download_coco_imgs.
 cd ../Style/
 
 echo "Generating Test Data"
-singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/test/ --style_dir ../Data/style_data/ --output ../Data/datasets/test/images/ --delete True
+singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/test/ --style_dir ../Data/style_data/ --output ../Data/dataset/test/images/ --delete True
 
 echo "Generating Val Data"
-singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/val/ --style_dir ../Data/style_data/ --output ../Data/datasets/val/images/ --delete True
+singularity run --nv ../../ultralytics_latest.sif python3 applystyle.py --content_dir ../Data/coco_data/val/ --style_dir ../Data/style_data/ --output ../Data/dataset/val/images/ --delete True
 
 echo "Style Job Completed"
