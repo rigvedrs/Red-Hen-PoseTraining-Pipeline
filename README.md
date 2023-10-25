@@ -8,7 +8,7 @@ The proposed pipeline for training looks like the following:
 The only difference here is I have used the new YOLO V8 model.
 
 ## Run
-To run the entire pipeline, simply run the following command:
+To run the entire pipeline on HPC, simply run the following command:
 ```
 sbatch run_pipeline.sh 
 ```
